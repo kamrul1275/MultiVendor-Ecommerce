@@ -24,6 +24,12 @@
 	<link href="{{ asset('AdminBackend/assets/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('AdminBackend/assets/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('AdminBackend/assets/css/icons.css') }}" rel="stylesheet">
+
+       <!-- Toaster -->
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+   <!-- Toaster   -->
+
+
 	<title>Admin Login</title>
 </head>
 
@@ -39,17 +45,9 @@
 							<div class="card-body">
 								<div class="border p-4 rounded">
 									<div class="text-center">
-										<h3 class="">Sign in</h3>
-										<p>Don't have an account yet? <a href="authentication-signup.html">Sign up here</a>
-										</p>
+										<h3 class="">Admin Sign in</h3>
 									</div>
-									<div class="d-grid">
-										<a class="btn my-4 shadow-sm btn-white" href="javascript:;"> <span class="d-flex justify-content-center align-items-center">
-                          <img class="me-2" src="{{ asset('AdminBackend/assets/images/icons/search.svg') }}" width="16" alt="Image Description">
-                          <span>Sign in with Google</span>
-											</span>
-										</a> <a href="javascript:;" class="btn btn-facebook"><i class="bx bxl-facebook"></i>Sign in with Facebook</a>
-									</div>
+
 									<div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
 										<hr/>
 									</div>
@@ -119,6 +117,31 @@
 			});
 		});
 	</script>
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+ @if(Session::has('message'))
+ var type = "{{ Session::get('alert-type','info') }}"
+ switch(type){
+    case 'info':
+    toastr.info(" {{ Session::get('message') }} ");
+    break;
+    case 'success':
+    toastr.success(" {{ Session::get('message') }} ");
+    break;
+    case 'warning':
+    toastr.warning(" {{ Session::get('message') }} ");
+    break;
+    case 'error':
+    toastr.error(" {{ Session::get('message') }} ");
+    break;
+ }
+ @endif
+</script>
 	<!--app JS-->
 	<script src="{{ asset('AdminBackend/assets/js/app.js') }}"></script>
 </body>

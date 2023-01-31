@@ -1,10 +1,6 @@
-@extends('Admin.layout.master')
+@extends('Vendor.layout.vendor_master')
 
-
-
-
-@section('admin_content')
-
+@section('vendor_content')
 
 
 <div class="page-content">

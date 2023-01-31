@@ -36,12 +36,14 @@ require __DIR__.'/auth.php';
 
 
 
-Route::middleware(['auth', 'role:vendor'])->group(function () {
+Route::get('/admin/login', [AdminController::class,'AdminLoginForm'])->name('admin.loginForm');
+
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 
 // admin part..........
-Route::get('/admin/login', [AdminController::class,'AdminLogin'])->name('admin.login');
 
 
 
@@ -88,9 +90,7 @@ Route::get('/vendor/login', [VendorController::class,'VendorLogin'])->name('vend
 
 
 
-
-Route::middleware(['auth', 'role:vendor'])->group(function () {
-
+    Route::middleware('auth','role:vendor')->group(function(){
 
 
     Route::get('/vendor/dashboard', [VendorController::class,'VendorDashboard'])->name('vendor.dashboard');
@@ -100,6 +100,8 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
 
 
     Route::get('/vendor/profile', [VendorController::class,'VendorProfile'])->name('vendor.profile');
+
+    Route::post('/vendor/profile', [VendorController::class,'VendorProfileStore'])->name('vendor.profile.store');
 
 
 

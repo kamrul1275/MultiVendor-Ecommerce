@@ -11,7 +11,7 @@ class AdminController extends Controller
 
 
 
-      public function AdminLogin( $var = null)
+      public function AdminLoginForm( $var = null)
       {
         return view('Admin.body.admin_login');
       }
@@ -63,6 +63,10 @@ class AdminController extends Controller
         $id = Auth::user()->id;
 
         $data = User::find($id);
+
+        //dd($request->username);
+
+        $data->username = $request->username;
         $data->email = $request->email;
         //dd($request->phone);
 
@@ -86,6 +90,8 @@ class AdminController extends Controller
 
         $data->save();
 
+
+
         $notification = array(
             'message' => 'Admin Profile Updated Successfully',
             'alert-type' => 'success'
@@ -93,7 +99,8 @@ class AdminController extends Controller
 
         return redirect()->back()->with($notification);
 
-    }
+    } // End Mehtod
+
 
 
      public function AdminInactive( $var = null)

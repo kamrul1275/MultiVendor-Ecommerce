@@ -26,8 +26,7 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-
-        public function store(LoginRequest $request)
+    public function store(LoginRequest $request)
     {
         $request->authenticate();
 
@@ -38,7 +37,7 @@ class AuthenticatedSessionController extends Controller
 
         if($request->user()->role === 'admin'){
 
-            $url='/admin/dashboard'; 
+            $url='/admin/dashboard';
 
         }elseif($request->user()->role === 'vendor'){
 
