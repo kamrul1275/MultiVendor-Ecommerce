@@ -19,6 +19,26 @@
             </a>
 
         </li>
+
+
+        @php
+
+            $id = Auth::user()->id;
+
+            $vendor_id = App\Models\User::find($id);
+
+            $status =$vendor_id->status;
+
+            //dd($status );
+
+      @endphp
+
+
+
+
+   @if( $status==='active')
+
+
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -35,20 +55,7 @@
         </li>
         <li class="menu-label">UI Elements</li>
 
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-cart'></i>
-                </div>
-                <div class="menu-title">Vendor Manage</div>
-            </a>
-            <ul>
-                <li> <a href="{{ route('admin.inactive') }}"><i class="bx bx-right-arrow-alt"></i>InActive</a>
-                </li>
-                <li> <a href="{{ route('admin.active') }}"><i class="bx bx-right-arrow-alt"></i>Active..</a>
-                </li>
 
-            </ul>
-        </li>
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
@@ -64,6 +71,8 @@
 
             </ul>
         </li>
+
+
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class="bx bx-repeat"></i>
@@ -79,36 +88,8 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon"> <i class="bx bx-donate-blood"></i>
-                </div>
-                <div class="menu-title">Icons</div>
-            </a>
-            <ul>
-                <li> <a href="icons-line-icons.html"><i class="bx bx-right-arrow-alt"></i>Line Icons</a>
-                </li>
-                <li> <a href="icons-boxicons.html"><i class="bx bx-right-arrow-alt"></i>Boxicons</a>
-                </li>
-                <li> <a href="icons-feather-icons.html"><i class="bx bx-right-arrow-alt"></i>Feather Icons</a>
-                </li>
-            </ul>
-        </li>
 
-        <li>
-            <a href="faq.html">
-                <div class="parent-icon"><i class="bx bx-help-circle"></i>
-                </div>
-                <div class="menu-title">FAQ</div>
-            </a>
-        </li>
-        <li>
-            <a href="pricing-table.html">
-                <div class="parent-icon"><i class="bx bx-diamond"></i>
-                </div>
-                <div class="menu-title">Pricing</div>
-            </a>
-        </li>
+
         <li class="menu-label">Charts & Maps</li>
         <li>
             <a class="has-arrow" href="javascript:;">
@@ -126,8 +107,10 @@
             </ul>
         </li>
 
+@else
+
+@endif
 
 
-    </ul>
     <!--end navigation-->
 </div>

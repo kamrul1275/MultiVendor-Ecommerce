@@ -42,41 +42,65 @@
                 <div class="menu-title">Vendor Manage</div>
             </a>
             <ul>
-                <li> <a href="{{ route('admin.inactive') }}"><i class="bx bx-right-arrow-alt"></i>InActive</a>
+                <li> <a href="{{ route('vendor.inactive') }}"><i class="bx bx-right-arrow-alt"></i>InActive</a>
                 </li>
-                <li> <a href="{{ route('admin.active') }}"><i class="bx bx-right-arrow-alt"></i>Active..</a>
+                <li> <a href="{{ route('vendor.active') }}"><i class="bx bx-right-arrow-alt"></i>Active..</a>
                 </li>
 
             </ul>
         </li>
+
+
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
                 </div>
-                <div class="menu-title">Components</div>
+                <div class="menu-title">Category</div>
             </a>
             <ul>
-                <li> <a href="component-alerts.html"><i class="bx bx-right-arrow-alt"></i>Alerts</a>
+                <li> <a href="{{ route('Category.create_category') }}"><i class="bx bx-right-arrow-alt"></i>Create Category</a>
                 </li>
-                <li> <a href="component-accordions.html"><i class="bx bx-right-arrow-alt"></i>Accordions</a>
+                <li> <a href="{{  route('Category.all_category') }}"><i class="bx bx-right-arrow-alt"></i>All Category</a>
                 </li>
 
 
             </ul>
         </li>
+
+
+
+
+
+  <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class="bx bx-line-chart"></i>
+                </div>
+                <div class="menu-title">SubCategory</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('SubCategory.create_subcategory') }}"><i class="bx bx-right-arrow-alt"></i>Create SubCategory</a>
+                </li>
+                <li> <a href="{{  route('SubCategory.all_subcategory') }}"><i class="bx bx-right-arrow-alt"></i>All SubCategory</a>
+                </li>
+
+
+            </ul>
+        </li>
+
+
+
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class="bx bx-repeat"></i>
                 </div>
-                <div class="menu-title">Content</div>
+                <div class="menu-title">Product</div>
             </a>
             <ul>
-                <li> <a href="content-grid-system.html"><i class="bx bx-right-arrow-alt"></i>Grid System</a>
+                <li> <a href="{{ route('create.product') }}"><i class="bx bx-right-arrow-alt"></i>Create Product</a>
                 </li>
-                <li> <a href="content-typography.html"><i class="bx bx-right-arrow-alt"></i>Typography</a>
+                <li> <a href="{{ route('all.product') }}"><i class="bx bx-right-arrow-alt"></i>All Product</a>
                 </li>
-                <li> <a href="content-text-utilities.html"><i class="bx bx-right-arrow-alt"></i>Text Utilities</a>
-                </li>
+
             </ul>
         </li>
         <li>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -103,13 +104,95 @@ class AdminController extends Controller
 
 
 
-     public function AdminInactive( $var = null)
+     public function InactiveVendor( $var = null)
      {
-        return view('Admin.vendor.inactive_vendor');
-     }
 
-     public function AdminActive( $var = null)
-     {
-        return view('Admin.vendor.active_vendor');
+        $InactiveVendor = User::where('status','inactive')->where('role','vendor')->latest()->get();
+
+        return view('Admin.vendor.inactive_vendor',compact('InactiveVendor'));
      }
+// End Mehtod
+
+
+public function InactiveVendorDetails($id=null)
+{
+    //$id = Auth::user()->id;
+   $InactiveVendors = User::find($id);
+
+   return view('Admin.vendor.inactive_vendorDetails',compact('InactiveVendors'));
+}
+// End Mehtod
+
+
+   public function InactiveVendorApprove(Request $request)
+   {
+
+
+          $verdor_id = $request->id;
+          //dd($request->id);
+          $user = User::findOrFail($verdor_id)->update([
+              'status' => 'active',
+          ]);
+
+
+$notification = array(
+    'message' => 'Vendor  Updated Successfully',
+    'alert-type' => 'success'
+);
+
+return redirect()->route('vendor.active')->with($notification);
+
+
+
+
+
+   }
+
+
+     public function ActiveVendor( $id = null)
+
+     {
+
+        $ActiveVendor = User::where('status','active')->where('role','vendor')->latest()->get();
+        return view('Admin.vendor.active_vendor',compact('ActiveVendor'));
+     }
+    //  end method
+
+
+    public function ActiveVendorDetails( $id = null)
+    {
+
+        $active_vendorDetails = User::find($id);
+       return view('Admin.vendor.active_vendorDetails',compact('active_vendorDetails'));
+    }//  end method
+
+
+
+   public function ActiveVendorApprove(Request $request)
+   {
+
+
+       $verdor_id = $request->id;
+
+       //dd($verdor_id);
+       $vendor = User::findOrFail($verdor_id)->update([
+           'status' => 'inactive',
+       ]);
+
+
+       //dd( $vendor);
+
+
+
+$notification = array(
+    'message' => 'Vendor  Updated Successfully',
+    'alert-type' => 'success'
+);
+
+
+
+       return redirect()->route('vendor.inactive')->with($notification);
+
+   }//  end method
+
 }

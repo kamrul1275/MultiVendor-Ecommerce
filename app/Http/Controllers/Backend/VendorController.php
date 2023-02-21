@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use app\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class VendorController extends Controller
 {
@@ -17,6 +18,40 @@ class VendorController extends Controller
     }
 
     // end method
+
+
+    public function VendorRegister( $var = null)
+    {
+        return view('vendor.body.vendor_register');
+    }
+    // end method
+
+
+
+    public function Vendorstore(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        $user = User::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'join_date' => $request->join_date,
+            'password' => Hash::make($request->password),
+            'role' => 'vendor',
+            'status' => 'inactive',
+        ]);
+
+
+        $notification = array(
+            'message' => 'Vendor register Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect('/vendor/login')->with($notification);
+    }
 
 
     public function VendorDashboard($var = null)
@@ -64,36 +99,37 @@ public function VendorProfileStore(Request $request)
 {
     $id = Auth::user()->id;
 
-        $dataV = User::find($id);
+        $data = User::find($id);
 
         //dd($request->username);
 
-        $dataV->username = $request->username;
-        $dataV->email = $request->email;
+        $data->username = $request->username;
+        $data->email = $request->email;
         //dd($request->phone);
 
 
         //dd($data->phone);
-        $dataV->phone = $request->phone;
+        $data->phone = $request->phone;
 
 
-        $dataV->address = $request->address;
+        $data->address = $request->address;
 
 
-
-        // update vendor image up
-
-
+        //dd($request->photo);
         if ($request->file('photo')) {
             $file = $request->file('photo');
-            @unlink(public_path('upload/vendor_images/'.$dataV->photo));
+            @unlink(public_path('upload/vendor_image/'.$data->photo));
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('upload/vendor_images'),$filename);
-            $dataV['photo'] = $filename;
+            $file->move(public_path('upload/vendor_image'),$filename);
+            $data['photo'] = $filename;
         }
 
-   //dd($dataV->photo);
-        $dataV->save();
+        //dd($data);
+
+        $data->save();
+
+
+
 
     $notification = array(
         'message' => 'Vendor Profile Updated Successfully',

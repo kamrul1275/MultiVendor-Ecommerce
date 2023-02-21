@@ -322,16 +322,22 @@
                     </li>
                 </ul>
             </div>
+
+            @php
+                  $id = Auth::user()->id;
+
+                  $data =app\Models\User::find($id);
+            @endphp
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img  src="{{ (!empty($vendor_profile->photo)) ? url('upload/vendor_images/'.$vendor_profile->photo):url('upload/no_image.jpg') }}"
+                    <img  src="{{ (!empty($data->photo)) ? url('upload/vendor_image/'.$data->photo):url('upload/no_image.jpg') }}"
                     class="rounded-circle p-1 bg-primary" width="40">
 
 
 
                     <div class="user-info ps-3">
                         <p class="user-name mb-0">{{ Auth::user()->name }}</p>
-                        <p class="designattion mb-0">Web Designer</p>
+                        <p class="designattion mb-0">Web Designer..</p>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">

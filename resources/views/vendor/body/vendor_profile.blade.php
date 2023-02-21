@@ -1,8 +1,7 @@
-@extends('Admin.layout.master')
+@extends('vendor.layout.vendor_master')
 
 
-
-@section('admin_content')
+@section('vendor_content')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -10,7 +9,7 @@
 <div class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">User Profile</div>
+        <div class="breadcrumb-title pe-3">Vendor Profile</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
@@ -36,7 +35,7 @@
                             <div class="d-flex flex-column align-items-center text-center">
 
 
-                                <img src="{{ (! empty($vendor_profile->photo)) ? url('upload/vendor_images/'.$vendor_profile->photo):url('upload/no_image.jpg') }}"
+                                <img src="{{ (! empty($vendor_profile->photo)) ? url('upload/vendor_image/'.$vendor_profile->photo):url('upload/no_image.jpg') }}"
                                 alt="Admin"  class="rounded-circle p-1 bg-primary" width="110">
 
 
@@ -74,7 +73,7 @@
 
               {{-- start form --}}
 
-              <form action="{{ route('vendor.profile.store') }}" method="POST">
+              <form action="{{ route('vendor.profile.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                             <div class="row mb-3">
@@ -132,7 +131,7 @@
                                     <h6 class="mb-0">Photo</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="file" name="photo" id="image" class="form-control"  />
+                                    <input  id="image"   type="file" name="photo" class="form-control"  />
                                 </div>
                             </div>
 
@@ -141,7 +140,7 @@
 
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <img src="{{ (! empty($vendor_profile->photo)) ? url('upload/vendor_images/'.$vendor_profile->photo):url('upload/no_image.jpg') }}"
+                                    <img src="{{ (! empty($vendor_profile->photo)) ? url('upload/vendor_image/'.$vendor_profile->photo):url('upload/no_image.jpg') }}"
                                      alt="Vendor" id="showImage" style="width:100px; height: 100px;">
                                 </div>
                             </div>
@@ -150,7 +149,7 @@
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
-                                <button class="btn btn-primary px-4">Save Changes</button>
+                                <button class="btn btn-primary px-4">Save </button>
                                 </div>
                             </div>
 

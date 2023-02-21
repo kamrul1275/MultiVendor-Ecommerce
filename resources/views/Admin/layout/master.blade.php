@@ -8,16 +8,22 @@
 	<!--favicon-->
 	<link rel="icon" href="{{ asset('AdminBackend/assets/images/favicon-32x32.png') }}" type="image/png" />
 
-   <!-- Toaster -->
-   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
-   <!-- Toaster   -->
+
+       {{-- Data Table --}}
+       <link href="{{ asset('AdminBackend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+
 
     <!--plugins-->
 	<link href="{{ asset('AdminBackend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet"/>
 	<link href="{{ asset('AdminBackend/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
 	<link href="{{ asset('AdminBackend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
 	<link href="{{ asset('AdminBackend/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
-	<!-- loader-->
+    <link href="{{ asset('AdminBackend/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
+
+
+
+
+    <!-- loader-->
 	<link href="{{ asset('AdminBackend/assets/css/pace.min.css') }}" rel="stylesheet" />
 	<script src="{{ asset('AdminBackend/assets/js/pace.min.js') }}"></script>
 	<!-- Bootstrap CSS -->
@@ -28,6 +34,8 @@
 	<link rel="stylesheet" href="{{ asset('AdminBackend/assets/css/dark-theme.css') }}" />
 	<link rel="stylesheet" href="{{ asset('AdminBackend/assets/css/semi-dark.css') }}" />
 	<link rel="stylesheet" href="{{ asset('AdminBackend/assets/css/header-colors.css') }}" />
+
+
 
    <!-- Toaster -->
    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
@@ -178,8 +186,14 @@
 	<!--end switcher-->
 	<!-- Bootstrap JS -->
 	<script src="{{ asset('AdminBackend/assets/js/bootstrap.bundle.min.js') }}"></script>
+
+
+
+
 	<!--plugins-->
 	<script src="{{ asset('AdminBackend/assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('AdminBackend/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+
 	<script src="{{ asset('AdminBackend/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
 	<script src="{{ asset('AdminBackend/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
 	<script src="{{ asset('AdminBackend/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
@@ -189,15 +203,55 @@
 	<script src="{{ asset('AdminBackend/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
 	<script src="{{ asset('AdminBackend/assets/plugins/sparkline-charts/jquery.sparkline.min.js') }}"></script>
 	<script src="{{ asset('AdminBackend/assets/plugins/jquery-knob/excanvas.js') }}"></script>
-	<script src="{{ asset('AdminBackend/assets/plugins/jquery-knob/jquery.knob.js') }}"></script>
+
+
+
+    <script src="{{ asset('AdminBackend/assets/plugins/jquery-knob/jquery.knob.js') }}"></script>
 	  <script>
 		  $(function() {
 			  $(".knob").knob();
 		  });
 	  </script>
-	  <script src="{{ asset('AdminBackend/assets/js/index.js') }}"></script>
+
+
+     {{-- DataTable --}}
+
+     <script src="{{ asset('AdminBackend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+     <script src="{{ asset('AdminBackend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+     <script>
+         $(document).ready(function() {
+             $('#example').DataTable();
+           } );
+     </script>
+     <script>
+         $(document).ready(function() {
+             var table = $('#example2').DataTable( {
+                 lengthChange: false,
+                 buttons: [ 'copy', 'excel', 'pdf', 'print']
+             } );
+
+             table.buttons().container()
+                 .appendTo( '#example2_wrapper .col-md-6:eq(0)' );
+         } );
+     </script>
+
+    <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+    </script>
+    <script>
+        tinymce.init({
+        selector: '#mytextarea'
+        });
+    </script>
+
+   <script src="{{ asset('AdminBackend/assets/js/index.js') }}"></script>
+
+
 	<!--app JS-->
 	<script src="{{ asset('AdminBackend/assets/js/app.js') }}"></script>
+
+    <script src="{{ asset('AdminBackend/assets/js/validate.min.js') }}"></script>
+
+
 
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -221,6 +275,41 @@
      }
      @endif
     </script>
+
+
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('#myForm').validate({
+            rules: {
+                brand_name: {
+                    required : true,
+                },
+            },
+            messages :{
+                brand_name: {
+                    required : 'Please Enter Brand Name',
+                },
+            },
+            errorElement : 'span',
+            errorPlacement: function (error,element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight : function(element, errorClass, validClass){
+                $(element).addClass('is-invalid');
+            },
+            unhighlight : function(element, errorClass, validClass){
+                $(element).removeClass('is-invalid');
+            },
+        });
+    });
+
+</script>
+
+
+
+
+
 
 
 </body>

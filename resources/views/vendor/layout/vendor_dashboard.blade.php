@@ -1,7 +1,33 @@
-@extends('Vendor.layout.vendor_master')
+@extends('vendor.layout.vendor_master')
 
 @section('vendor_content')
 
+
+@php
+
+     $id = Auth::user()->id;
+
+     $vendor_id = App\Models\User::find($id);
+
+     $status =$vendor_id->status;
+
+     //dd($status );
+
+
+@endphp
+
+
+@if( $status==='active')
+
+<h4>Vendor account is <span class="text-success">Active</span> </h4>
+
+@else
+<h4>Vendor account is <span class="text-danger">InActive</span> </h4>
+
+<p class="text-danger">Plz wait, admin will be approve</p>
+@endif
+
+  
 
 <div class="page-content">
 
