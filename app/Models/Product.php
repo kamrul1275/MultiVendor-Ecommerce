@@ -12,10 +12,16 @@ class Product extends Model
     protected $guarded = [];
 
 
-    public function users(){
+    public function vendors(){
 
-        return $this->belongsTo(User::class,'vendor_id');
+        return $this->belongsTo(User::class,'vendor_id','id');
 
-    }
+    }  //end method
+
+    public function categories(){
+
+        return $this->belongsTo(Category::class,'category_id','id');
+
+    }//end method
 }
    

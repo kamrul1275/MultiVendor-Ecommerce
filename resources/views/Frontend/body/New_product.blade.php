@@ -84,7 +84,17 @@ $products = App\Models\Product::where('status',1)->limit(10)->get();
                             </div>
                             <div class="product-content-wrap">
                                 <div class="product-category">
-                                    <a href="shop-grid-right.html">Snack</a>
+
+
+                                @if ($product->category_id==null)
+
+                                <a href="shop-grid-right.html">No category</a>
+                                @else
+
+                                <a href="shop-grid-right.html">{{ $product['categories']['category_name'] }}</a>
+                                @endif
+
+                                   
                                 </div>
                                 <h2><a href="shop-product-right.html">{{$product->product_name}}</a></h2>
                                 <div class="product-rate-cover">
@@ -97,7 +107,20 @@ $products = App\Models\Product::where('status',1)->limit(10)->get();
                               
 
                                 <div>
-                                    <span class="font-small text-muted">By <a href="vendor-details-1.html">NestFood</a></span>
+
+
+
+@if ($product->vendor_id==null)
+
+<span class="font-small text-muted">By <a href="vendor-details-1.html">Admin</a></span>
+@else
+<span class="font-small text-muted">By <a href="vendor-details-1.html">{{$product['vendors']['name']}}</a></span>
+@endif
+
+
+
+
+                
                                 </div>
 
 
