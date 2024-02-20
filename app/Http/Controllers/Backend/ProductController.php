@@ -18,8 +18,8 @@ class ProductController extends Controller
 
    public function AllProduct( $var = null)
    {
-        //   $products = Product::latest()->get();
-          return view('Admin.product.all_product');
+         $products = Product::latest()->get();
+          return view('Admin.product.all_product',compact('products'));
    }
    //    end method
 
@@ -46,11 +46,24 @@ class ProductController extends Controller
        Image::make($image)->resize(800,800)->save('upload/products/thambnail/'.$name_gen);
        $save_url = 'upload/products/thambnail/'.$name_gen;
 
+
+
+
+
+       //dd($request->brand_id);
+
        $product_id = Product::insertGetId([
 
 
         //dd($request->product_name),
+
+       
            'brand_id' => $request->brand_id,
+
+
+          // dd($request->brand_id),
+
+
            'category_id' => $request->category_id,
            'subcategory_id' => $request->subcategory_id,
            'product_name' => $request->product_name,
@@ -66,7 +79,7 @@ class ProductController extends Controller
            'discount_price' => $request->discount_price,
            'short_descript' => $request->short_descript,
            'long_descript' => $request->long_descript,
-   dd($request->hot_deals),
+   //dd($request->hot_deals),
            'hot_deals' => $request->hot_deals,
            'featured' => $request->featured,
            'speacial_offer' => $request->speacial_offer,
@@ -79,7 +92,7 @@ class ProductController extends Controller
 
        ]);
 
-
+       //dd($request->brand_id);
 
     /// Multiple Image Upload From her //////
 

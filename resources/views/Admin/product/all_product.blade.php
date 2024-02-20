@@ -38,8 +38,9 @@
                             <th>S.No</th>
                             <th>Product_Name</th>
                             <th>Product_Code</th>
-                            <th>Qty</th>
-                            <th>Color</th>
+                            <th>Qty</th> 
+                            <!-- <th>Color</th>  -->
+                            <th>Main Thambnail</th> 
                             <th>Selling_Price</th>
                             <th>Discount_Price</th>
                             <th>Action</th>
@@ -47,40 +48,46 @@
                         </tr>
                     </thead>
                     <tbody>
-{{--
+
                       @foreach($products as $key => $item)
 
                         <tr>
                             <td>{{  $key+1 }}</td>
-                            <td>{{ $item->category_name }}</td>
-                            <td>{{ $item->category_name }}</td>
-                            <td>{{ $item->category_name }}</td>
-                            <td>{{ $item->category_name }}</td>
-                            <td>{{ $item->category_name }}</td>
+                            <td>{{ $item->product_name }}</td>
+                            <td>{{ $item->product_code }}</td>
+                           <td>{{ $item->product_qty }}</td>
+                            <!-- <td>{{ $item->product_color }}</td> -->
 
+                            <td> <img src="{{ asset($item->product_thambnail) }}" style="width: 70px; height:40px;" >  </td>
+
+                            <td>{{ $item->selling_price }}</td>
+                            <td>{{ $item->discount_price }}</td>
+
+
+               <td>
 
             <a href="" class="btn btn-info">Edit</a>
 
 
             <a href="" class="btn btn-danger"  >Delete</a>
 
-                            </td>
-                        </tr>
+                </td>
+                        
+            </tr>
 
-                        @endforeach --}}
+                        @endforeach
 
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>S.No</th>
+                        <th>S.No</th>
                             <th>Product_Name</th>
                             <th>Product_Code</th>
                             <th>Qty</th>
-                            <th>Color</th>
+                            <th>Main Thambnail</th> 
                             <th>Selling_Price</th>
                             <th>Discount_Price</th>
                             <th>Action</th>
-
 
                         </tr>
                     </tfoot>

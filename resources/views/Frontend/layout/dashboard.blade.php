@@ -15,7 +15,7 @@
 
       {{-- feature category start --}}
 
-@include('Frontend.body.feature_category')
+      @include('Frontend.body.feature_category')
 
         <!--End category slider-->
 
@@ -27,17 +27,8 @@
 
 
        {{-- New Product --}}
-     @include('Frontend.body.New_product')
-        <!--Products Tabs-->
-
-
-
-
-      {{-- Features Product --}}
-
       @include('Frontend.body.New_product')
-        <!--End Best Sales-->
-
+        <!--Products Tabs-->
 
 
 
@@ -48,7 +39,7 @@
 
         <!-- TV Category -->
 
-   @include('Frontend.body.tv_category')
+    @include('Frontend.body.tv_category')
         <!--End TV Category -->
 
 
@@ -57,7 +48,7 @@
 
         <!-- Tshirt Category -->
 
-  @include('Frontend.body.frontend_Tshirt_Category')
+    @include('Frontend.body.frontend_Tshirt_Category')
         <!--End Tshirt Category -->
 
 
@@ -69,7 +60,7 @@
 
         <!-- Computer Category -->
 
- @include('Frontend.body.frontend_Computer_Category')
+     @include('Frontend.body.frontend_Computer_Category')
         <!--End Computer Category -->
 
 
