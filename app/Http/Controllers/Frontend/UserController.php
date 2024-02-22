@@ -6,16 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Product;
 
 class UserController extends Controller
 {
 
 
    public function Index($var = null)
-   {
+   {    
 
+    $hot_deals = Product::where('hot_deals',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(3)->get();
 
-    return view('Frontend.layout.dashboard');
+    $speacial_offer = Product::where('speacial_offer',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(3)->get();
+    $new_products = Product::where('status',1)->orderBy('id','DESC')->limit(3)->get();
+
+    
+    return view('Frontend.layout.dashboard',compact('hot_deals','speacial_offer','new_products'));
    }
    // end method
 
