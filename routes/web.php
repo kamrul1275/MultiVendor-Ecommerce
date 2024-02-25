@@ -7,7 +7,8 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\VendorController;
-use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\UserController; 
+use App\Http\Controllers\Frontend\NewProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -232,6 +233,12 @@ Route::post('/vendor/register', [VendorController::class,'Vendorstore'])->name('
 });
 
 
+
+// product modal ajax part
+
+
+
+Route::get('/product/view/{id}',[NewProductController::class,'ProductModalVew']);
 
 
 
