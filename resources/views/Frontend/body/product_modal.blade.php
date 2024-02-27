@@ -29,23 +29,21 @@
                                 <h3 class="title-detail" ><a href="shop-product-right.html" class="text-heading" id="pName"> </a></h3>
                               
 <!-- colo -->
-                            <div class="form-group col-sm-9 text-secondary">Color
-                                    <select class="form-select form-select-sm mb-3" name="color" aria-label=".form-select-sm example">
+                            <div class="form-group col-sm-9 text-secondary" id="colorArea">Color
+                                    <select class="form-select form-select-sm mb-3" id="color" name="color" aria-label=".form-select-sm example">
 
-                                      <option value="">Red</option>
-                                      <option value="">Green</option>
-                                      <option value="">Blue</option>
+                                      <!-- <option value="">Red</option> -->
+                                     
                                     </select>
                                 </div>
 
 <!-- size -->
 
-                            <div class="form-group col-sm-9 text-secondary">size
-                                    <select class="form-select form-select-sm mb-3" name="color" aria-label=".form-select-sm example">
+                            <div class="form-group col-sm-9 text-secondary" id="sizeArea">size
+                                    <select class="form-select form-select-sm mb-3" id="size" name="size" aria-label=".form-select-sm example">
 
-                                      <option value="">Small</option>
-                                      <option value="">Medium</option>
-                                      <option value="">Large</option>
+                                      <!-- <option value="">Small</option> -->
+                                     
                                     </select>
                                 </div>
 
@@ -83,7 +81,12 @@
 
                                     <ul>
                                         <li class="mb-5" >Code:  <span class="text-brand" id="pCode"> </span></li>
-                                        <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2022</span></li>
+                                        
+                                        
+                                        <li class="mb-5">aviable:<span class="badge badge-pill badge-success"  id="aviable" style="background: green; color:white"> </span></li>
+
+                                        <li class="mb-5">stokeOut:<span class="badge badge-pill badge-danger" id="stokeout"  style="background: red; color:white"> </span>
+                                    </li>
                                     </ul>
 
                                     </div>

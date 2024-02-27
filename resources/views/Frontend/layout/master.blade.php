@@ -114,12 +114,12 @@
 
 //alert('ok');
 function productView($id){
-// alert($id);
- var id = 3; 
+// alert($id); 
+ //var id = 3; 
 $.ajax({
 
 type:'GET',
-  url:'/product/view/'+id,
+  url:'/product/view/'+$id,
   dataType:'JSON',
 
   success:function(data){
@@ -138,6 +138,80 @@ $('#pImage').attr('src','/' + data.product.product_thambnail);
 
 $('#pPrice').text(data.product.selling_price);
 $('#pDiscount').text(data.product.discount_price);
+
+// available and stockout
+
+
+
+if(data.product.product_qty >0){
+ $('#aviable').text('');
+ $('#stokeout').text('');
+ $('#aviable').text('aviable');
+}else{
+
+    $('#aviable').text('');
+ $('#stokeout').text('');
+ $('#stokeout').text('stokeout');
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// color
+
+$('select[name="color"]').empty();
+
+  $.each(data.color, function(key,value){
+         
+    $('select[name="color"]').append( '<option value=" '+ value+' "  >' +value+' </option>' )
+
+    if(data.color==""){
+$("#colorArea").hidden();
+    }else{
+        $("#colorArea").show();
+
+    }
+
+
+  })//end method
+
+
+  // size
+
+$('select[name="size"]').empty();
+
+$.each(data.size, function(key,value){
+       
+  $('select[name="size"]').append( '<option value=" '+ value+' "  >' +value+' </option>' )
+
+  if(data.size==""){
+$("#sizeArea").hidden();
+  }else{
+      $("#sizeArea").show();
+
+  }
+
+  
+})
+
+
+
+
+
+
+
+
+
+
+
 
 
 
