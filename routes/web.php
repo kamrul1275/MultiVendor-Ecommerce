@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\VendorController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\UserController; 
 use App\Http\Controllers\Frontend\NewProductController;
 use Illuminate\Support\Facades\Route;
@@ -242,7 +243,13 @@ Route::get('/product/view/{id}',[NewProductController::class,'ProductModalVew'])
 
 
 
-// Vendor Part
+Route::post(' Cart/Data/Store/{id}',[CartController::class,'addToCartSore']);
+
+Route::get(' /product/minit/cart/',[CartController::class,'miniCartGet']);
+
+
+
+// Vendor Part  /product/minit/cart
 
 
 

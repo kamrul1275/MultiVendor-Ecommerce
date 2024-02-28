@@ -39,7 +39,6 @@
 
         <!-- TV Category -->
 
-    @include('Frontend.body.tv_category')
         <!--End TV Category -->
 
 
@@ -48,7 +47,7 @@
 
         <!-- Tshirt Category -->
 
-    @include('Frontend.body.frontend_Tshirt_Category')
+   
         <!--End Tshirt Category -->
 
 
@@ -60,7 +59,7 @@
 
         <!-- Computer Category -->
 
-     @include('Frontend.body.frontend_Computer_Category')
+    
         <!--End Computer Category -->
 
 

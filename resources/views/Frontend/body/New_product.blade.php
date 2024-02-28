@@ -144,7 +144,8 @@ $products = App\Models\Product::where('status',1)->limit(10)->get();
 
                                  
                                     <div class="add-cart">
-                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                        <input type="hidden" id="product_id">
+                                        <a class="add"  onclick="addToCart()"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                     </div>
                                 </div>
                             </div>

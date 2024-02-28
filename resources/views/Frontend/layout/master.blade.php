@@ -17,13 +17,14 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="Frontend/assets/css/plugins/animate.min.css" />
     <link rel="stylesheet" href="Frontend/assets/css/main.css?v=5.3" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <!-- Modal -->
 @include('Frontend.body.product_modal')
     <!-- Quick view -->
-  
+
 
 
 
@@ -74,7 +75,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    
+
     <script src="Frontend/assets/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="Frontend/assets/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="Frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
@@ -114,8 +115,7 @@
 
 //alert('ok');
 function productView($id){
-// alert($id); 
- //var id = 3; 
+
 $.ajax({
 
 type:'GET',
@@ -126,13 +126,18 @@ type:'GET',
 
  console.log(data);
 
-          
+
 $('#pName').text(data.product.product_name);
 $('#pCode').text(data.product.product_code);
-$('#pCategory').text(data.product.categories.category_name); 
-$('#pBrand').text(data.product.categories.brand_name);  
+$('#pCategory').text(data.product.categories.category_name);
+$('#pBrand').text(data.product.categories.brand_name);
 // image
 $('#pImage').attr('src','/' + data.product.product_thambnail);
+
+
+
+$('#pQuanty').val(data.product.quantity);
+$('#product_id').val(data.product.id);
 
 
 
@@ -170,7 +175,7 @@ if(data.product.product_qty >0){
 $('select[name="color"]').empty();
 
   $.each(data.color, function(key,value){
-         
+
     $('select[name="color"]').append( '<option value=" '+ value+' "  >' +value+' </option>' )
 
     if(data.color==""){
@@ -189,7 +194,7 @@ $("#colorArea").hidden();
 $('select[name="size"]').empty();
 
 $.each(data.size, function(key,value){
-       
+
   $('select[name="size"]').append( '<option value=" '+ value+' "  >' +value+' </option>' )
 
   if(data.size==""){
@@ -199,29 +204,139 @@ $("#sizeArea").hidden();
 
   }
 
-  
+
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   }
 
 });
 
+}//end method
+
+
+
+// start add to cart
+
+function addToCart(id) {
+    var product_name = $('#pName').text();
+    var id = $('#product_id').val();
+    var quanty = $('#pQuanty').val();
+    var color = $('#color option:selected').text();
+    var size = $('#size option:selected').text();
+
+    $.ajax({
+        url: "Cart/Data/Store/" +id,
+        type: 'POST',
+        dataType: 'json', // Corrected dataType value
+        data: {
+            id:id,
+            color: color,
+            size: size,
+            product_name: product_name,
+            quanty: quanty
+        },
+        success: function(data) {
+
+
+            // used miniCart autoupdate
+            miniCart();
+           $('#closeModal').click();
+
+        // Start Message
+        const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+            })
+            if ($.isEmptyObject(data.error)) {
+
+                    Toast.fire({
+                    type: 'success',
+                    title: data.success,
+                    })
+            }else{
+
+           Toast.fire({
+                    type: 'error',
+                    title: data.error,
+                    })
+                }
+
+              // End Message
+
+            console.log(data);
+        }
+    });
 }
 
 
+// end add to cart
+
+
+</script>
+
+
+<script>
+
+
+
+function miniCart(){
+
+       $.ajax({
+
+              type:'GET',
+              dataType:'json',
+              url:"/product/minit/cart",
+
+
+              success:function(response){
+
+            //  console.log(response);
+
+
+            // $("#qtny").text(response.cartqty);
+            $("#cartqtny").text(response.cartqty);
+            $('span[id="carSubtotal"]').text(response.carttotal)
+
+
+            var miniCart = "";
+
+            $.each(response.carts , function(key ,value){
+
+                miniCart += `
+
+                                     <ul>
+                                        <li>
+                                            <div class="shopping-cart-img">
+                                                <a href="shop-product-right.html"><img alt="Nest" style="height:50px; width:50px;" src="/${value.options.image}"  /></a>
+                                            </div>
+                                            <div class="shopping-cart-title">
+                                                <h4><a href="shop-product-right.html">${value.name}</a></h4>
+                                                <h4><span>1 × </span>${value.price}</h4>
+                                            </div>
+                                            <div class="shopping-cart-delete">
+                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                    <hr>  <br>
+
+                                 `
+            })
+
+            $("#miniCart").html(miniCart);
+
+              }
+
+       })
+
+}
+
+miniCart();
 </script>
 
 </body>
