@@ -50,6 +50,7 @@
 
                                 <div class="clearfix product-price-cover">
                                     <div class="product-price primary-color float-left">
+                                    <span class="current-price text-brand"  >$ </span>
                                         <span class="current-price text-brand" id="pPrice" > </span>
                                         <span>
                                             <span class="save-price font-md color3 ml-15">26% Off</span>
@@ -57,8 +58,8 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="detail-extralink mb-30">
-                                    <div class="detail-qty border radius">
+<div class="detail-extralink mb-30">
+                                                                    <div class="detail-qty border radius">
                                         <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                         <input type="text" id="pQuanty" name="pQuanty" class="qty-val" value="1" min="1">
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>

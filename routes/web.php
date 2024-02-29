@@ -248,6 +248,9 @@ Route::post(' Cart/Data/Store/{id}',[CartController::class,'addToCartSore']);
 Route::get(' /product/minit/cart/',[CartController::class,'miniCartGet']);
 
 
+Route::get('/remove/minit/cart/{rowId}',[CartController::class,'removeminiCart']);
+
+
 
 // Vendor Part  /product/minit/cart
 

@@ -58,8 +58,12 @@ if( $product->discount_price == null){
         'weight'=>1,
         
 
-         'options' => ['size' => $request->size, 
-         'color'=>$request->color],
+         'options' => [
+          'size' => $request->size, 
+         'color'=>$request->color,
+         'image'=>$product->product_thambnail,
+        
+        ],
         
         
          ]);
@@ -92,4 +96,24 @@ if( $product->discount_price == null){
 
 
     }
+
+
+
+
+function removeminiCart($rowId){
+
+    Cart::remove($rowId);
+
+    return response()->json([
+        'success'=>'successfully remove to cart'
+        ]);
+
+}
+
+
+
+
+
+
+
 }

@@ -226,7 +226,7 @@ function addToCart(id) {
     var size = $('#size option:selected').text();
 
     $.ajax({
-        url: "Cart/Data/Store/" +id,
+        url: "Cart/Data/Store/"+id,
         type: 'POST',
         dataType: 'json', // Corrected dataType value
         data: {
@@ -272,8 +272,8 @@ function addToCart(id) {
     });
 }
 
-
 // end add to cart
+
 
 
 </script>
@@ -315,10 +315,10 @@ function miniCart(){
                                             </div>
                                             <div class="shopping-cart-title">
                                                 <h4><a href="shop-product-right.html">${value.name}</a></h4>
-                                                <h4><span>1 × </span>${value.price}</h4>
+                                                <h4><span>${value.qty} × </span>${value.price}</h4>
                                             </div>
                                             <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                <a type="submit" id="${value.rowId}" onclick="removeminiCart(this.id)" ><i class="fi-rs-cross-small"></i></a>
                                             </div>
                                         </li>
 
@@ -337,6 +337,51 @@ function miniCart(){
 }
 
 miniCart();
+
+
+// remove cart
+
+function removeminiCart(rowId){
+  $.ajax({
+
+    type:'GET',
+    dataType:'JSON',
+
+    url:"/remove/minit/cart/"+rowId,
+
+    success:function(data){
+
+           // used miniCart autoupdate
+           miniCart();
+
+    // Start Message
+    const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+            })
+            if ($.isEmptyObject(data.error)) {
+
+                    Toast.fire({
+                    type: 'success',
+                    title: data.success,
+                    })
+            }else{
+
+           Toast.fire({
+                    type: 'error',
+                    title: data.error,
+                    })
+                }
+
+
+    }
+     
+  })
+}
+
 </script>
 
 </body>
