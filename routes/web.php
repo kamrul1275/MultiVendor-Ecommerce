@@ -9,7 +9,8 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\UserController; 
-use App\Http\Controllers\Frontend\NewProductController;
+use App\Http\Controllers\Frontend\NewProductController; 
+use App\Http\Controllers\Frontend\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -252,7 +253,24 @@ Route::get('/remove/minit/cart/{rowId}',[CartController::class,'removeminiCart']
 
 
 
-// Vendor Part  /product/minit/cart
+// wishlist Part 
 
+Route::POST('/add-to/wishlist/{product_id}',[WishlistController::class,'addToWshlist']);
+
+Route::middleware(['auth','role:user'])->group(function () {
+
+
+    Route::get('/wishlist',[WishlistController::class,'WshlistProduct'])->name('wishlist');
+
+    Route::get('/get/wishlist/product',[WishlistController::class,'GetWshlistProduct']);
+
+
+
+
+    Route::delete('/get/wishlist/remove/{id}',[WishlistController::class,'wishlistRemove']);
+
+
+    
+});
 
 

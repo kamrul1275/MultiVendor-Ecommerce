@@ -49,12 +49,12 @@ $products = App\Models\Product::where('status',1)->limit(10)->get();
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
                                     <a href="shop-product-right.html">
-                                        <img class="default-img" src="{{asset($product->    product_thambnail ) }}" alt="" />
+                                        <img class="default-img" src="{{asset($product->product_thambnail ) }}" alt="" />
                                         <img class="hover-img" src="Frontend/assets/imgs/shop/product-1-2.jpg" alt="" />
                                     </a>
                                 </div>
                                 <div class="product-action-1">
-                                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                    <a aria-label="Add To Wishlist" class="action-btn"  id="{{$product->id}}" onclick="addToWashlist(this.id)"  ><i class="fi-rs-heart"></i></a>
                                     <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                     <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"  data-bs-target="#quickViewModal" id="{{$product->id}}" onclick="productView(this.id)"><i class="fi-rs-eye"></i></a>
                                 </div>

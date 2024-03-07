@@ -384,6 +384,186 @@ function removeminiCart(rowId){
 
 </script>
 
+
+<script>
+
+
+function addToWashlist(product_id){
+
+    $.ajax({
+
+url:"/add-to/wishlist/"+product_id,
+type:"POST",
+dataType:"json",
+
+
+success:function(data){
+
+
+        // Start Message
+        const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+            })
+            if ($.isEmptyObject(data.error)) {
+
+                    Toast.fire({
+                    type: 'success',
+                    title: data.success,
+                    })
+            }else{
+
+           Toast.fire({
+                    type: 'error',
+                    title: data.error,
+                    })
+                }
+
+              // End Message
+
+    //console.log(data)
+}
+
+          
+    })
+}
+</script>
+
+
+  <script>
+
+  
+$.ajax({
+
+
+
+     url:"get/wishlist/product",
+     type:'get',
+
+     dataType:"json",
+     success:function(response){
+// console.log(response.wishList);
+
+
+
+
+           var rows = "";
+
+           $.each(response.wishList, function(key, value){
+          
+              rows += `
+                    <tr>
+                       
+                       
+                        <td class="image product-thumbnail"><img src="/${value.products.product_thambnail}" alt="#" /></td>
+                        <td class="product-des product-name">
+                            <h6><a class="product-name mb-10" href="shop-product-right.html">${value.products.product_name} </a></h6>
+                            
+                            <td class="price" data-title="Price">
+                        ${value.products.discount_price == null
+                        ? `<h3 class="text-brand">$${value.products.selling_price}</h3>`
+                        :`<h3 class="text-brand">$${value.products.discount_price}</h3>`
+                        }
+                            
+                        </td>
+
+
+                        <td class="text-center detail-info" data-title="Stock">
+                            ${value.products.product_qty > 0 
+                                ? `<span class="stock-status in-stock mb-0"> In Stock </span>`
+                                :`<span class="stock-status out-stock mb-0">Stock Out </span>`
+                            } 
+                           
+                        </td>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width: 90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                        </td>
+                       
+                        
+                      
+                        <td class="text-right" data-title="Cart">
+                            <button class="btn btn-sm btn-secondary">Contact Us</button>
+                        </td>
+                        <td class="action text-center" data-title="Remove">
+                            <a type="submite" id="${value.products.id}" onclick="productRemove(this.id)"  class="text-body"><i class="fi-rs-trash"></i></a>
+                        </td>
+                    </tr>
+
+              `
+           })
+
+
+   
+ $('#wishlist').html(rows);
+
+
+
+
+     }
+})
+
+addToWashlist();
+
+  </script>
+
+
+<script>
+
+
+function productRemove(id){
+
+    //alert(id);
+
+    $.ajax({
+type:"DELETE",
+dataType:"json",
+url:"/get/wishlist/remove/"+id,
+
+
+  success:function(response){
+   
+
+    addToWashlist();
+        // Start Message
+        const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success',
+                  showConfirmButton: false,
+                  timer: 3000
+            })
+            if ($.isEmptyObject(response.error)) {
+
+                    Toast.fire({
+                    type: 'success',
+                    title: response.success,
+                    })
+            }else{
+
+           Toast.fire({
+                    type: 'error',
+                    title: response.error,
+                    })
+                }
+
+              // End Message
+
+  }
+
+    });
+}
+
+
+</script>
+
+
 </body>
 
 </html>
