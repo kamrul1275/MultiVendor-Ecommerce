@@ -72,18 +72,23 @@ return view('Frontend.wishlist.wishlist');
 
 
 
-function wishlistRemove($id){
+// function wishlistRemove($id){
 
-    Wishlist::where('user_id', Auth::id())->where('id',$id)
-->delete();
+//     Wishlist::where('user_id', Auth::id())->where('id',$id)
+// ->delete();
 
-   return response()->json([
-      'error'=>'Wishlist Delete Successfully',
-   ]);
+//    return response()->json([
+//       'success'=>'Wishlist Delete Successfully',
+//    ]);
 
-}//end method
+// }//end method
 
 
+public function WishlistRemove($id){
+
+   Wishlist::where('user_id',Auth::id())->where('id',$id)->delete();
+return response()->json(['success' => 'Successfully Product Remove' ]);
+}// End Method
 
 
 

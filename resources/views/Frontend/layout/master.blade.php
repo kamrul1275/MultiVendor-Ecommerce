@@ -385,11 +385,16 @@ function removeminiCart(rowId){
 </script>
 
 
+
+<!-- wishlist start -->
+
+
 <script>
 
 
 function addToWashlist(product_id){
 
+    var product_id = 2;
     $.ajax({
 
 url:"/add-to/wishlist/"+product_id,
@@ -399,7 +404,7 @@ dataType:"json",
 
 success:function(data){
 
-
+console.log("product id check",data);
         // Start Message
         const Toast = Swal.mixin({
                   toast: true,
@@ -429,136 +434,145 @@ success:function(data){
 
           
     })
+
+
+    ///addToWashlist();
 }
 </script>
 
 
-  <script>
-
-  
-$.ajax({
 
 
+<script>
 
-     url:"get/wishlist/product",
-     type:'get',
+//function wishlist(){
 
-     dataType:"json",
-     success:function(response){
+    $.ajax({
+
+
+
+url:"/get/wishlist/product",
+type:'get',
+
+dataType:"json",
+success:function(response){
 // console.log(response.wishList);
 
 
 
 
-           var rows = "";
+      var rows = "";
 
-           $.each(response.wishList, function(key, value){
-          
-              rows += `
-                    <tr>
+      $.each(response.wishList, function(key, value){
+     
+         rows += `
+               <tr>
+                  
+                  
+                   <td class="image product-thumbnail"><img src="/${value.products.product_thambnail}" alt="#" /></td>
+                   <td class="product-des product-name">
+                       <h6><a class="product-name mb-10" href="shop-product-right.html">${value.products.product_name} </a></h6>
                        
+                       <td class="price" data-title="Price">
+                   ${value.products.discount_price == null
+                   ? `<h3 class="text-brand">$${value.products.selling_price}</h3>`
+                   :`<h3 class="text-brand">$${value.products.discount_price}</h3>`
+                   }
                        
-                        <td class="image product-thumbnail"><img src="/${value.products.product_thambnail}" alt="#" /></td>
-                        <td class="product-des product-name">
-                            <h6><a class="product-name mb-10" href="shop-product-right.html">${value.products.product_name} </a></h6>
-                            
-                            <td class="price" data-title="Price">
-                        ${value.products.discount_price == null
-                        ? `<h3 class="text-brand">$${value.products.selling_price}</h3>`
-                        :`<h3 class="text-brand">$${value.products.discount_price}</h3>`
-                        }
-                            
-                        </td>
+                   </td>
 
 
-                        <td class="text-center detail-info" data-title="Stock">
-                            ${value.products.product_qty > 0 
-                                ? `<span class="stock-status in-stock mb-0"> In Stock </span>`
-                                :`<span class="stock-status out-stock mb-0">Stock Out </span>`
-                            } 
-                           
-                        </td>
-                            <div class="product-rate-cover">
-                                <div class="product-rate d-inline-block">
-                                    <div class="product-rating" style="width: 90%"></div>
-                                </div>
-                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                            </div>
-                        </td>
-                       
-                        
+                   <td class="text-center detail-info" data-title="Stock">
+                       ${value.products.product_qty > 0 
+                           ? `<span class="stock-status in-stock mb-0"> In Stock </span>`
+                           :`<span class="stock-status out-stock mb-0">Stock Out </span>`
+                       } 
                       
-                        <td class="text-right" data-title="Cart">
-                            <button class="btn btn-sm btn-secondary">Contact Us</button>
-                        </td>
-                        <td class="action text-center" data-title="Remove">
-                            <a type="submite" id="${value.products.id}" onclick="productRemove(this.id)"  class="text-body"><i class="fi-rs-trash"></i></a>
-                        </td>
-                    </tr>
+                   </td>
+                       <div class="product-rate-cover">
+                           <div class="product-rate d-inline-block">
+                               <div class="product-rating" style="width: 90%"></div>
+                           </div>
+                           <span class="font-small ml-5 text-muted"> (4.0)</span>
+                       </div>
+                   </td>
+                  
+                   
+                 
+                   <td class="text-right" data-title="Cart">
+                       <button class="btn btn-sm btn-secondary">Contact Us</button>
+                   </td>
+                   <td class="action text-center" data-title="Remove">
+                       
+                   <a type="submit" class="text-body" id="${value.id}" onclick="wishlistRemove(this.id)" ><i class="fi-rs-trash"></i></a>
+                   
+                   </td>
+               </tr>
 
-              `
-           })
-
-
-   
- $('#wishlist').html(rows);
+         `
+      })
 
 
 
+$('#wishlist').html(rows);
 
-     }
+
+
+
+}
 })
 
-addToWashlist();
 
-  </script>
+
+//}
+
+// addToWashlist();
+
+</script>
 
 
 <script>
 
 
-function productRemove(id){
-
-    //alert(id);
-
-    $.ajax({
-type:"DELETE",
-dataType:"json",
-url:"/get/wishlist/remove/"+id,
 
 
-  success:function(response){
-   
-
-    addToWashlist();
-        // Start Message
-        const Toast = Swal.mixin({
+    function wishlistRemove(id){
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/get/wishlist/remove/"+id,
+                success:function(data){
+                 //wishlist();
+                     // Start Message 
+            const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
-                  icon: 'success',
+                  
                   showConfirmButton: false,
-                  timer: 3000
+                  timer: 3000 
             })
-            if ($.isEmptyObject(response.error)) {
-
+            if ($.isEmptyObject(data.error)) {
+                    
                     Toast.fire({
                     type: 'success',
-                    title: response.success,
+                    icon: 'success', 
+                    title: data.success, 
                     })
             }else{
-
+               
            Toast.fire({
                     type: 'error',
-                    title: response.error,
+                    icon: 'error', 
+                    title: data.error, 
                     })
                 }
+              // End Message  
+                }
+            })
+        }
 
-              // End Message
 
-  }
 
-    });
-}
 
 
 </script>

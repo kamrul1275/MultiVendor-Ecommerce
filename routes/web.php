@@ -255,21 +255,27 @@ Route::get('/remove/minit/cart/{rowId}',[CartController::class,'removeminiCart']
 
 // wishlist Part 
 
-Route::POST('/add-to/wishlist/{product_id}',[WishlistController::class,'addToWshlist']);
+
 
 Route::middleware(['auth','role:user'])->group(function () {
 
 
     Route::get('/wishlist',[WishlistController::class,'WshlistProduct'])->name('wishlist');
 
+    Route::post('/add-to/wishlist/{product_id}',[WishlistController::class,'addToWshlist']);
+
     Route::get('/get/wishlist/product',[WishlistController::class,'GetWshlistProduct']);
 
 
 
 
-    Route::delete('/get/wishlist/remove/{id}',[WishlistController::class,'wishlistRemove']);
+    Route::get('/get/wishlist/remove/{id}',[WishlistController::class,'WishlistRemove']);
+
+    // Route::get('/wishlist-remove/{id}' , 'WishlistRemove');
 
 
+    // MyCart
+    Route::get('/mycart',[CartController::class,'myCart'])->name('mycart');
     
 });
 

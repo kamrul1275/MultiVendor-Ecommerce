@@ -111,8 +111,12 @@ function removeminiCart($rowId){
 }
 
 
+// my cart
 
 
+function myCart(){
+    return view("Frontend.cart.mycart");
+}
 
 
 

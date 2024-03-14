@@ -97,12 +97,13 @@
                             <div class="header-action-icon-2">
                                 <a href="shop-wishlist.html">
                                     <img class="svgInject" alt="Nest" src="Frontend/assets/imgs/theme/icons/icon-heart.svg" />
-                                    <span class="pro-count blue">6</span>
+                                    <!-- <span class="pro-count blue">6</span> -->
+                                    <span class="pro-count blue" id="wishQty"> </span>
                                 </a>
                                 <a href="{{ route('wishlist') }}"><span class="lable">Wishlist</span></a>
                             </div>
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
+                                <a class="mini-cart-icon" href="{{route('mycart') }}">
                                     <img alt="Nest" src="Frontend/assets/imgs/theme/icons/icon-cart.svg" />
                                     <span class="pro-count blue" id="cartqtny">  </span>
                                 </a>
