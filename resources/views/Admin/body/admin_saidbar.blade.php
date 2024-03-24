@@ -103,6 +103,23 @@
 
             </ul>
         </li>
+
+        <!-- coupon start -->
+        <li>
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class="bx bx-repeat"></i>
+                </div>
+                <div class="menu-title">Coupon</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('create.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Create Coupon</a>
+                </li>
+                <li> <a href="{{ route('all.coupon') }}"><i class="bx bx-right-arrow-alt"></i>All Coupon</a>
+                </li>
+
+            </ul>
+        </li>
+        <!-- end  coupon -->
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"> <i class="bx bx-donate-blood"></i>

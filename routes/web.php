@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Frontend\CartController;
@@ -275,8 +276,21 @@ Route::middleware(['auth','role:user'])->group(function () {
 
 
     // MyCart
-    Route::get('/mycart',[CartController::class,'myCart'])->name('mycart');
-    
+    Route::get('/mycart',[CartController::class,'myCart'])->name('mycart'); 
+    Route::get('/get/my/cart',[CartController::class,'getMyCart'])->name('get.My.Cart');
+    //Route::get('/remove/mycart/{rowId}',[CartController::class,'removeMyCart'])->name('remove.MyCart');
+    Route::get('/cart-remove/{rowId}' , [CartController::class,'CartRemove']);
+    Route::get('/cart/decrement/{rowId}' , [CartController::class,'CartQntyDecrement']);
+    Route::get('/cart/increment/{rowId}' , [CartController::class,'CartQntyIncrement']);
+   
 });
 
+
+
+
+
+//Route::get('/all/coupon',[CouponController::class,'AllCoupon']);
+Route::get('/create/coupon',[CouponController::class,'CreateCoupon'])->name('create.coupon');
+Route::post('/store/coupon',[CouponController::class,'StoreCoupon'])->name('store.coupon');
+Route::get('/coupon',[CouponController::class,'AllCoupon'])->name('all.coupon');
 

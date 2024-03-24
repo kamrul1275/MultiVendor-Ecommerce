@@ -120,4 +120,48 @@ function myCart(){
 
 
 
+function getMyCart(){
+        
+    $carts = Cart::content();
+    $cartqty = Cart::count();
+    $carttotal = Cart::total();
+
+    return response()->json([
+           
+          'carts'=>$carts,
+          'cartqty'=> $cartqty,
+          'carttotal'=>$carttotal,
+
+    ]);
+
+
+}
+
+// remove my cart
+
+public function CartRemove($rowId){
+    Cart::remove($rowId);
+    return response()->json(['success' => 'Successfully Remove From Cart']);
+
+}// End Method
+
+function CartQntyDecrement($rowId){
+    $row = Cart::get($rowId);
+    Cart::update($rowId, $row->qty -1);
+
+    return response()->json('Decrement');
+
+        
+}//end method  CartQntyIncrement
+
+function CartQntyIncrement($rowId){
+    $row = Cart::get($rowId);
+    Cart::update($rowId, $row->qty +1);
+
+    return response()->json('Increment');
+
+        
+}//end method
+
+
 }

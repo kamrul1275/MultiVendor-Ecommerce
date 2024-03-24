@@ -573,7 +573,183 @@ $('#wishlist').html(rows);
 
 
 
+// myCart Strat
 
+
+
+function Cart(){
+
+$.ajax({
+
+       type:'GET',
+       dataType:'json',
+       url:"/get/my/cart",
+
+
+       success:function(response){
+
+       console.log(response);
+
+
+
+     var rows = "";
+
+     $.each(response.carts , function(key ,value){
+
+                       rows += `           
+                               <tr class="pt-30">
+                                   
+                                   <td class="image product-thumbnail pt-40"><img src="/${value.options.image}" alt="#"></td>
+                                   <td class="product-des product-name">
+                                       <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="${value.name}">Field Roast Chao Cheese Creamy Original</a></h6>
+                                       <div class="product-rate-cover">
+                                           <div class="product-rate d-inline-block">
+                                               <div class="product-rating" style="width:90%">
+                                               </div>
+                                           </div>
+                                           <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                       </div>
+                                   </td>
+                                   <td class="price" data-title="Price">
+                                       <h4 class="text-body">$ ${value.price} </h4>
+                                   </td>
+
+
+                                   <td class="price" data-title="Price">
+                                   ${value.options.size===null
+                                    ?  `<span> ...</span>`
+                                    :   `<span> ${value.options.size} </span>`
+                                
+                                }
+                                    
+                                   </td>
+
+
+                                   <td class="price" data-title="Price">
+                                   
+                                       <h4 class="text-body"> ${value.options.color} </h4>
+                                   </td>
+
+
+                                   <td class="text-center detail-info" data-title="Stock">
+                                       <div class="detail-extralink mr-15">
+                                           <div class="detail-qty border radius">
+                                               <a type="submit"  id="${value.rowId}"  onclick="cartDecrement(this.id)"  class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+
+                                               <input type="text" name="quantity" class="qty-val" value=" ${value.qty}" min="1">
+
+                                               <a id="${value.rowId}"   onclick="cartIncrement(this.id)" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                           </div>
+                                       </div>
+                                   </td>
+
+
+                                   <td class="price" data-title="Price">
+                                       <h4 class="text-brand">${value.subtotal}</h4>
+                                   </td>
+                                   <td class="action text-center" data-title="Remove"><a type="submit" id="${value.rowId}" onclick="cartRemove(this.id)" class="text-body"><i class="fi-rs-trash"></i></a></td>
+                               </tr>  `
+     })
+
+     $("#getMyCart").html(rows);
+
+       }
+
+})
+
+}
+
+Cart();
+// end myCart
+
+
+
+
+
+
+// remove cart
+
+// Cart Remove Start 
+function cartRemove(id){
+
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/cart-remove/"+id,
+                success:function(data){
+                    Cart();
+                     // Start Message 
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  
+                  showConfirmButton: false,
+                  timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    icon: 'success', 
+                    title: data.success, 
+                    })
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    icon: 'error', 
+                    title: data.error, 
+                    })
+                }
+              // End Message  
+                }
+            })
+        }
+// Cart Remove End 
+
+
+
+function cartDecrement(rowId){
+
+    $.ajax({
+
+type:'GET',
+dataType:'json',
+url:"/cart/decrement/"+rowId,
+
+
+success:function(response){
+
+    Cart();
+     // used miniCart autoupdate
+     miniCart();
+
+}
+
+});
+}
+
+// cartIncrement
+
+function cartIncrement(rowId){
+
+$.ajax({
+
+type:'GET',
+dataType:'json',
+url:"/cart/increment/"+rowId,
+
+
+success:function(response){
+
+Cart();
+ // used miniCart autoupdate
+ miniCart();
+
+}
+
+});
+}
 
 </script>
 
