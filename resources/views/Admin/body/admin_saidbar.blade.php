@@ -124,14 +124,14 @@
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"> <i class="bx bx-donate-blood"></i>
                 </div>
-                <div class="menu-title">Icons</div>
+                <div class="menu-title">Shipping Area</div>
             </a>
             <ul>
-                <li> <a href="icons-line-icons.html"><i class="bx bx-right-arrow-alt"></i>Line Icons</a>
+                <li> <a href="{{route('all.Division') }}"><i class="bx bx-right-arrow-alt"></i>All Division</a>
                 </li>
-                <li> <a href="icons-boxicons.html"><i class="bx bx-right-arrow-alt"></i>Boxicons</a>
+                <li> <a href="{{route('all.district')}}"><i class="bx bx-right-arrow-alt"></i>All District</a>
                 </li>
-                <li> <a href="icons-feather-icons.html"><i class="bx bx-right-arrow-alt"></i>Feather Icons</a>
+                <li> <a href="{{ route('all.state')}}"><i class="bx bx-right-arrow-alt"></i>All Sate</a>
                 </li>
             </ul>
         </li>

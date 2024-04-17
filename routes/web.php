@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\UserController; 
 use App\Http\Controllers\Frontend\NewProductController; 
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,11 +34,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[UserController::class,'Index'])->name('frontend.index');
 
 
-//Route::get('login',[UserController::class,'UserLogin'])->name('frontend.login');
+Route::get('/login',[UserController::class,'UserLogin'])->name('frontend.login');
 
 
 
-Route::middleware('auth','verified')->group(function(){
+Route::middleware(['auth', 'role:user'])->group(function(){
 
 
     Route::get('/dashboard',[UserController::class,'UserDashboard'])->name('frontend.dashboard');
@@ -204,7 +205,7 @@ Route::post('/vendor/register', [VendorController::class,'Vendorstore'])->name('
 
 
 
-    Route::middleware('auth','role:vendor')->group(function(){
+    // Route::middleware(['auth','role:vendor'])->group(function(){
 
 
     Route::get('/vendor/dashboard', [VendorController::class,'VendorDashboard'])->name('vendor.dashboard');
@@ -220,20 +221,7 @@ Route::post('/vendor/register', [VendorController::class,'Vendorstore'])->name('
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-});
+// });
 
 
 
@@ -294,3 +282,41 @@ Route::get('/create/coupon',[CouponController::class,'CreateCoupon'])->name('cre
 Route::post('/store/coupon',[CouponController::class,'StoreCoupon'])->name('store.coupon');
 Route::get('/coupon',[CouponController::class,'AllCoupon'])->name('all.coupon');
 
+
+Route::get('/edit/coupon/{id}',[CouponController::class,'EditCoupon'])->name('edit.coupon');
+Route::post('/update/coupon',[CouponController::class,'UpdateCoupon'])->name('update.coupon');
+Route::get('/delete/coupon/{id}',[CouponController::class,'DeleteCoupon'])->name('delete.coupon');
+
+
+// All Division area
+
+Route::controller(ShippingAreaController::class)->group(function(){
+
+    Route::get('/all/division', "AllDivision")->name('all.Division');
+    Route::get('/create/division', "createDivision")->name('create.division');
+    Route::post('/store/division', "storeDivision")->name('store.Division');
+
+});
+
+
+// All District area
+
+Route::controller(ShippingAreaController::class)->group(function(){
+
+    Route::get('/all/district', "AllDistrict")->name('all.district');
+    Route::get('/create/district', "createDistrict")->name('create.district');
+    Route::post('/store/district', "storeDistrict")->name('store.district');
+
+});
+
+
+
+// All State area
+
+Route::controller(ShippingAreaController::class)->group(function(){
+
+    Route::get('/all/state', "AllState")->name('all.state');
+    Route::get('/create/state', "CreateState")->name('create.state');
+    Route::post('/store/state', "storeState")->name('store.state');
+
+});

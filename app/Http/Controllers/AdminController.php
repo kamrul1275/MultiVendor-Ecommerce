@@ -15,7 +15,9 @@ class AdminController extends Controller
       public function AdminLoginForm( $var = null)
       {
         return view('Admin.body.admin_login');
-      }
+    //return "hello";  
+    
+    }
 
 
     public function AdminDashboard( $var = null)

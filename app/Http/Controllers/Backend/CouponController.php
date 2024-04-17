@@ -37,5 +37,50 @@ return view('Admin.coupon.create_coupon');
  
      return redirect()->route('create.coupon')->with($notification);
  
-   }
+   }// end method
+
+
+
+   public function EditCoupon($id){
+
+      $coupon = Coupon::findOrFail($id);
+      return view('Admin.coupon.edit_coupon',compact('coupon'));
+
+  }// End Method 
+
+
+  public function UpdateCoupon(Request $request){
+
+      $coupon_id = $request->id;
+
+       Coupon::findOrFail($coupon_id)->update([
+          'coupon_name' => strtoupper($request->coupon_name),
+          'coupon_discount' => $request->coupon_discount,
+          'coupon_validity' => $request->coupon_validity,
+         
+      ]);
+
+     $notification = array(
+          'message' => 'Coupon Updated Successfully',
+          'alert-type' => 'success'
+      );
+
+      return redirect()->route('all.coupon')->with($notification); 
+
+
+  }// End Method 
+
+   public function DeleteCoupon($id){
+
+      Coupon::findOrFail($id)->delete();
+
+       $notification = array(
+          'message' => 'Coupon Deleted Successfully',
+          'alert-type' => 'success'
+      );
+
+      return redirect()->back()->with($notification); 
+
+
+  }// End Method 
 }

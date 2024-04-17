@@ -93,7 +93,9 @@ class UserController extends Controller
 
    public function UserLogin($var = null)
    {
-    return view('Frontend.body.pages.user_login');
+    // return view('Frontend.body.pages.user_login');
+
+    return "helllo login";
    }
    // end method
 

@@ -21,7 +21,7 @@
         <div class="ms-auto">
             <div class="btn-group">
 
-                <a href="{{ route('create.coupon') }}" type="button" class="btn btn-primary"> Add Coupon</a>
+                <a href="{{ route('create.division') }}" type="button" class="btn btn-primary"> Add Division</a>
 
             </div>
         </div>
@@ -36,32 +36,20 @@
                     <thead>
                         <tr>
                             <th>S.No</th>
-                            <th>Coupon_Name</th>
-                            <th>Coupon_Discount</th>
-                            <th>Coupon_Validation</th>
-                            <th>Coupon_Status</th>
+                            <th>Division_Name</th>
                             <th>Action</th>
 
                         </tr>
                     </thead>
                     <tbody>
 
-                      @foreach($coupons as $key => $item)
+                      @foreach($divisions as $key => $item)
 
                         <tr>
                         <td>{{ $key+1 }}</td>
-                            <td>{{ $item->coupon_name }}</td>
-                            <td>{{ $item->coupon_discount }}%</td>
-                            <td> {{ Carbon\Carbon::parse($item->coupon_validity)->format('D, d F Y') }}  </td>
+                            <td>{{ $item->division_name }}</td>
+                           
 
-                            <td> 
-@if($item->coupon_validity >= Carbon\Carbon::now()->format('Y-m-d'))
-<span class="badge rounded-pill bg-success">Valid</span>
-@else
-<span class="badge rounded-pill bg-danger">Invalid</span>
-@endif
-
-				  </td>
                   <td> 
 <a href="{{ route('edit.coupon',$item->id) }}" class="btn btn-info">Edit</a>
 <a href="{{ route('delete.coupon',$item->id) }}" class="btn btn-danger" id="delete" >Delete</a>
@@ -76,9 +64,8 @@
                     <tfoot>
                         <tr>
                         <th>S.No</th>
-                            <th>Coupon_Name</th>
-                            <th>Coupon_Discount</th>
-                            <th>Validation</th>
+                            <th>Division_Name</th>
+                        
                             <th>Action</th>
                         </tr>
                     </tfoot>
