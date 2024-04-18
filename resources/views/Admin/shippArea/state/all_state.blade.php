@@ -49,9 +49,9 @@
 
                         <tr>
                         <td>{{ $key+1 }}</td>
-                            <td>{{ $item->division_name }}</td>
-                            <td>{{ $item->district_name }}</td>
-                            <td>{{ $item->division_name }}</td>
+                            <td>{{ $item->division_id }}</td>
+                            <td>{{ $item->district_id }}</td>
+                            <td>{{ $item->state_name }}</td>
                            
 
                   <td> 

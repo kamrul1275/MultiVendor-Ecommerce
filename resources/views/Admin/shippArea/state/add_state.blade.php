@@ -34,7 +34,7 @@
              <div class="card-body">
 
 
-                <form id="myForm" action="{{ route('store.coupon') }}"  method="POST" enctype="multipart/form-data">
+                <form id="myForm" action="{{ route('store.state') }}"  method="POST" enctype="multipart/form-data">
 
                     @csrf
 
@@ -44,7 +44,7 @@
                                     <h6 class="mb-0">State_Name</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" name="division_name" class="form-control"  />
+                                    <input type="text" name="state_name" class="form-control"  />
                                 </div>
                             </div>
 
@@ -54,7 +54,7 @@
                                     <h6 class="mb-0">Division Name</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <select class="form-select form-select-lg mb-3" name="category_id" aria-label=".form-select-lg example">
+                                    <select class="form-select form-select-lg mb-3" name="division_id" aria-label=".form-select-lg example">
 
                                        @foreach ($divisions as $division)
                                         <option value="{{ $division->id }}">{{ $division->division_name }}</option>
@@ -71,10 +71,10 @@
                                     <h6 class="mb-0">District Name</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <select class="form-select form-select-lg mb-3" name="category_id" aria-label=".form-select-lg example">
+                                    <select class="form-select form-select-lg mb-3" name="district_id" aria-label=".form-select-lg example">
 
                                        @foreach ($districts as $district)
-                                        <option value="{{ $district->id }}">{{ $district->district }}</option>
+                                        <option value="{{ $district->id }}">{{ $district->distric_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

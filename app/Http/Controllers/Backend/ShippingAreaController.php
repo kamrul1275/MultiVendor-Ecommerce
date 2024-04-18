@@ -93,12 +93,28 @@ class ShippingAreaController extends Controller
 
         $divisions = ShipDivision::latest()->get();
         $districts = ShipDistric::latest()->get();
+
+        //dd(districts);
         return view('Admin.shippArea.state.add_state',compact('divisions','districts'));
     }
 
 
     function storeState(Request $request){
+         
 
+        $data =new ShipState();
+        $data->division_id =$request->division_id;
+        $data->district_id =$request->district_id;
+        $data->state_name =$request->state_name;
+        $data->save();
+    
+    
+        $notification = array(
+            'message' => 'State Insert Successfully',
+            'alert-type' => 'success'
+        );
+    
+        return redirect()->route('all.state')->with($notification); 
     }//end method
 
 
