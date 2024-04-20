@@ -48,7 +48,7 @@
 
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td>{{ $item->Category->category_name }}</td>
+                            <td>{{ $item->Category->category_name ??  "" }}</td>
                             <td>{{ $item->subcategory_name }}</td>
                              <td>
 
@@ -62,7 +62,7 @@
             <a href="" class="btn btn-info">Edit</a>
 
 
-            <a href="" class="btn btn-danger" id="delete"  >Delete</a>
+            <a href="{{ route('SubCategory.delete',$item->id)  }}" class="btn btn-danger" id="delete"  >Delete</a>
 
                             </td>
                         </tr>

@@ -69,7 +69,7 @@
             <a href="" class="btn btn-info">Edit</a>
 
 
-            <a href="" class="btn btn-danger"  >Delete</a>
+            <a href="{{ route('delete.product',$item->id)}}" class="btn btn-danger"  >Delete</a>
 
                 </td>
                         

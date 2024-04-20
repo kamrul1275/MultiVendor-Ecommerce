@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Nest - Multipurpose eCommerce HTML Template</title>
+    <title>user</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -319,7 +319,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="Frontend/assets/imgs/theme/logo.svg" alt="logo" /></a>
+                        <a href="{{route('frontend.index')}}"><img src="Frontend/assets/imgs/theme/logo.svg" alt="logo" /></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
@@ -384,7 +384,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more...</span></div>
+                                <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more</span></div>
                             </div>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
@@ -392,7 +392,7 @@
                                 <ul>
 
                                     <li>
-                                        <a class="active" href="index.html">Home  </a>
+                                        <a class="active" href="{{ route('frontend.index')}}">Home  </a>
 
                                     </li>
                                     <li>
@@ -647,7 +647,7 @@
                     <nav>
                         <ul class="mobile-menu font-heading">
                             <li class="menu-item-has-children">
-                                <a href="index.html">Home</a>
+                                <a href="{{ route('frontend.index')}}">Home</a>
 
                             </li>
                             <li class="menu-item-has-children">

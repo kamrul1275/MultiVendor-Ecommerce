@@ -210,7 +210,7 @@
                             <ul>
 
                                 <li>
-                                    <a class="active" href="{{ route('frontend.index') }}">Home  </a>
+                                    <a class="active" href="{{ route('frontend.index') }}">Home...  </a>
 
                                 </li>
 

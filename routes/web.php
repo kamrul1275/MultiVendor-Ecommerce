@@ -190,6 +190,10 @@ Route::get('/all/product', [ProductController::class,'AllProduct'])->name('all.p
 Route::post('/store/product', [ProductController::class,'StoreProduct'])->name('store.product');
 
 
+
+
+Route::get('/delete/product/{id}', [ProductController::class,'ProdctDelete'])->name('delete.product');
+
 });
 
 
@@ -270,6 +274,13 @@ Route::middleware(['auth','role:user'])->group(function () {
     Route::get('/cart-remove/{rowId}' , [CartController::class,'CartRemove']);
     Route::get('/cart/decrement/{rowId}' , [CartController::class,'CartQntyDecrement']);
     Route::get('/cart/increment/{rowId}' , [CartController::class,'CartQntyIncrement']);
+
+// coupon apply
+
+    Route::get('/apply-coupon' , [CartController::class,'couponApply']);
+
+
+
    
 });
 

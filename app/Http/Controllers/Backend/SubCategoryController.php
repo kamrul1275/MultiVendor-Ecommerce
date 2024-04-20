@@ -26,8 +26,11 @@ class SubCategoryController extends Controller
 
     public function AllSubCategory($var = null)
     {
-        $SubCategories= Subcategory::latest()->get();
-        return view('Admin.subcategory.all_subcategory',compact('SubCategories'));
+        $SubCategories= Subcategory::with('Category')->latest()->get();
+
+//return   $SubCategories;
+
+     return view('Admin.subcategory.all_subcategory',compact('SubCategories'));
 
     }
     // end method
@@ -36,7 +39,7 @@ class SubCategoryController extends Controller
 
    public function StoreSubCategory(Request $request)
     {
-//dd($request->category_name);
+//dd($request->category_id);
 
 
 
@@ -68,5 +71,22 @@ return redirect()->route('SubCategory.all_subcategory')->with($notification);
             return json_encode($subcat);
 
     }// End Method
+
+    function DeleteSubCategory($id){
+
+        $data = Subcategory::findOrfail($id);
+        $data->delete();
+    
+    
+        $notification = array(
+            'message' => 'Subcategory Delete Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('SubCategory.all_subcategory')->with($notification);
+       }//end method
+    
+    
+
+    
 
 }
