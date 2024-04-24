@@ -38,7 +38,7 @@ Route::get('/login',[UserController::class,'UserLogin'])->name('frontend.login')
 
 
 
-Route::middleware(['auth', 'role:user'])->group(function(){
+Route::middleware(['auth', 'user'])->group(function(){
 
 
     Route::get('/dashboard',[UserController::class,'UserDashboard'])->name('frontend.dashboard');
@@ -69,7 +69,7 @@ require __DIR__.'/auth.php';
 Route::get('/admin/login', [AdminController::class,'AdminLoginForm'])->name('admin.loginForm');
 
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
 
 
 

@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class Role
+class Adminmiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,14 +18,10 @@ class Role
     public function handle(Request $request, Closure $next)
     {
 
-//dd($request->user()->role);
-    //     if($request->user()->role !==$role){
-
-    //         return redirect('/login');
-
-    //  }
-
-             return $next($request);
-         }
+        //dd(Auth::user()->role);
+        if(Auth::user()->role == 'admin'){
+            return $next($request);
+        }
+        return redirect()->route('frontend.dashboard');
     }
-
+}
