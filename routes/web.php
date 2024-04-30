@@ -280,7 +280,12 @@ Route::middleware(['auth','role:user'])->group(function () {
     Route::get('/apply-coupon' , [CartController::class,'couponApply']);
 
 
+    Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
 
+    Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+
+    
+    
    
 });
 

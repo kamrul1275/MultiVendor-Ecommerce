@@ -133,15 +133,19 @@
                                 </div>
                             </div>
                             <div class="header-action-icon-2">
-                                <a href="page-account.html">
-                                    <img class="svgInject" alt="Nest" src="Frontend/assets/imgs/theme/icons/icon-user.svg" />
-                                </a>
 
-                                <a href="{{ route('login') }}"><span class="lable ml-0">Login /  </span></a>
+<a href="{{ route('login') }}">
+    <img class="svgInject" alt="Nest" src="Frontend/assets/imgs/theme/icons/icon-user.svg" />
+</a>
+
+<a href="{{ route('login') }}"><span class="lable ml-0">Login /  </span></a>
 
 
-                                <a href="{{ route('register') }}"><span class="lable ml-0">  Signup</span></a>
+<a href="{{ route('register') }}"><span class="lable ml-0">  Signup</span></a>
 
+
+                            
+                     
                             </div>
                         </div>
                     </div>
@@ -210,7 +214,7 @@
                             <ul>
 
                                 <li>
-                                    <a class="active" href="{{ route('frontend.index') }}">Home...  </a>
+                                    <a class="active" href="{{ route('frontend.index') }}">Home  </a>
 
                                 </li>
 

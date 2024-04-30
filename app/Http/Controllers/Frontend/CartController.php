@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Coupon;
 use Carbon\Carbon;
-// use Cart;use
+// use Cart;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
@@ -167,32 +167,78 @@ function CartQntyIncrement($rowId){
 
 
 
-
-function couponApply(Request $request){
-
-    $coupon = Coupon::where('coupon_name',$request->coupon_name)->where('coupon_validity','>=',Carbon::now()->format('Y-m-d'))->first();
+function couponApply(Request $request) {
+    $coupon = Coupon::where('coupon_name', $request->coupon_name)
+                    ->where('coupon_validity', '>=', Carbon::now()->format('Y-m-d'))
+                    ->first();
 
     if ($coupon) {
-        Session::put('coupon',[
+        // Debug Cart::total() value
+        $cartTotal = Cart::total();
+        if (!is_numeric($cartTotal)) {
+            return response()->json(['error' => 'Cart total is not numeric. Value: ' . $cartTotal]);
+        }
+        
+        // Ensure coupon discount is numeric
+        $couponDiscount = $coupon->coupon_discount;
+        if (!is_numeric($couponDiscount)) {
+            return response()->json(['error' => 'Coupon discount is not numeric. Value: ' . $couponDiscount]);
+        }
+        
+        // Calculate discount and total amount
+        $discountAmount = round($cartTotal * $couponDiscount / 100);
+        $totalAmount = round($cartTotal - $discountAmount);
+
+        Session::put('coupon', [
             'coupon_name' => $coupon->coupon_name, 
-            'coupon_discount' => $coupon->coupon_discount, 
-             //'discount_amount' => round(Cart::total() * $coupon->coupon_discount/100), 
-            // 'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount/100 )
+            'coupon_discount' => $couponDiscount, 
+            'discount_amount' => $discountAmount, 
+            'total_amount' => $totalAmount
         ]);
 
-        return response()->json(array(
+        return response()->json([
             'validity' => true,                
-            'success' => 'Coupon Applied Successfully',
-
-        ));
-
-
-    } else{
+            'success' => 'Coupon Applied Successfully'
+        ]);
+    } else {
         return response()->json(['error' => 'Invalid Coupon']);
     }
+}
 
 
-}//end method
+
+
+public function CouponCalculation(){
+
+    if (Session::has('coupon')) {
+
+        return response()->json([
+
+         'subtotal' => Cart::total(),
+         'coupon_name' => session()->get('coupon')['coupon_name'],
+         'coupon_discount' => session()->get('coupon')['coupon_discount'],
+         'discount_amount' => session()->get('coupon')['discount_amount'],
+         'total_amount' => session()->get('coupon')['total_amount'], 
+        ]);
+    }else{
+        return response()->json(array(
+            'total' => Cart::total(),
+        ));
+    } 
+}// End Method
+
+
+
+
+
+
+public function CouponRemove(){
+
+    Session::forget('coupon');
+    return response()->json(['success' => 'Coupon Remove Successfully']);
+
+}// End Method
+
 
 
 }
